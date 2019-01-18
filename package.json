@@ -1,0 +1,29 @@
+{
+  "name": "surgeon-service",
+  "version": "1.0.0-SNAPSHOT",
+  "description": "Surgeon as a service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ComLock/surgeon-service.git"
+  },
+  "keywords": [
+    "Surgeon",
+    "Service"
+  ],
+  "author": "Christian Andreas Westgaard <comlock@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ComLock/surgeon-service/issues"
+  },
+  "homepage": "https://github.com/ComLock/surgeon-service#readme",
+  "private": true,
+  "dependencies": {
+    "esm": "^3.1.0",
+    "querystring": "^0.2.0",
+    "surgeon": "^3.12.0"
+  }
+}
