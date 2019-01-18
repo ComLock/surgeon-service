@@ -14,13 +14,17 @@ import surgeon, {
 const operate = surgeon({
 	evaluator: cheerioEvaluator(),
 	subroutines: {
-		...subroutineAliasPreset
+		...subroutineAliasPreset,
+		x: (subject, values, bindle) => selectSubroutine(subject, values.map(value => value.startsWith('{') ? value : xPathToCss(value)), bindle)
 	}
 });
 import {parse as parseYaml} from 'yaml';
+import xPathToCss from 'xpath-to-css';
+
+//──────────────────────────────────────────────────────────────────────────────
 
 const yml = `title: "select 'html head title' | rtc"
-heading: "select 'html body h1' | rtc"
+heading: "x '//h1' | rtc"
 `;
 const obj = parseYaml(yml);
 /*const obj = {
@@ -40,6 +44,8 @@ const htmlAttr = htmlStr.replace('<', '&lt;').replace('>', '&gt;');
 
 const hostname = '127.0.0.1';
 const port = 3000;
+
+//──────────────────────────────────────────────────────────────────────────────
 
 const server = http.createServer((req, res) => {
 	res.statusCode = 200;
