@@ -140,6 +140,8 @@ const server = http.createServer((req, res) => {
 
 		<h3>Subroutines</h3>
 		See <a href="https://github.com/gajus/surgeon#subroutines">Built-in subroutines</a>
+
+		<h4>Modify and select from document</h4>
 		<table>
 			<thead>
 				<tr>
@@ -148,17 +150,95 @@ const server = http.createServer((req, res) => {
 				</tr>
 			</thead>
 			<tbody>
-				<!--tr>
+				<tr>
+					<td>remove</td>
+					<td>Remove elements from the document</td>
+				</tr>
+				<tr>
+					<td>rm</td>
+					<td>Short for remove subroutine</td>
+				</tr>
+				<tr>
+					<td>sa</td>
+					<td>Select any (sa). Selects multiple elements (0 or more). Returns array. Equivalent to select "..." {0,}</td>
+				</tr>
+				<tr>
+					<td>saf</td>
+					<td>Select any first (saf). Selects multiple elements (0 or more). Returns single result or null. Equivalent to select "..." {0,}[0]</td>
+				</tr>
+				<tr>
 					<td>select</td>
-					<td>select the elements in the document</td>
-				</tr-->
+					<td>Select the elements in the document</td>
+				</tr>
+				<tr>
+					<td>sm</td>
+					<td>Select many (sm). Selects multiple elements (1 or more). Returns array. Equivalent to select "..." {1,}</td>
+				</tr>
+				<tr>
+					<td>so</td>
+					<td>Select one (so). Selects a single element. Returns single result. Equivalent to select "..." {1}[0].</td>
+				</tr>
+				<tr>
+					<td>x</td>
+					<td>Select using xpath selector rather than css selector</td>
+				</tr>
+				<!--
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				-->
+			</tbody>
+		</table>
+
+		<h4>Read from matched element(s)</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Subroutine</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>ra</td>
+					<td>Reads Element attribute value. Equivalent to read attribute ...</td>
+				</tr>
+				<tr>
+					<td>read attribute</td>
+					<td>Extract attribute value from the matching element</td>
+				</tr>
+				<tr>
+					<td>read property</td>
+					<td>Extract property value from the matching element</td>
+				</tr>
+				<tr>
+					<td>rp</td>
+					<td>Reads Element property value. Equivalent to read property ...</td>
+				</tr>
+				<tr>
+					<td>rtc</td>
+					<td>Reads textContent property of an element. Equivalent to read property ... textContent</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h4>Value(s) processing</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Subroutine</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
 				<tr>
 					<td>normalize</td>
-					<td>normalize an url</td>
+					<td>Normalize an url</td>
 				</tr>
 				<tr>
 					<td>resolve</td>
-					<td>resolve one or more urls</td>
+					<td>Resolve one or more urls</td>
 				</tr>
 				<tr>
 					<td>removeFragment</td>
@@ -167,10 +247,6 @@ const server = http.createServer((req, res) => {
 				<tr>
 					<td>reverse</td>
 					<td>Reverse sort an array</td>
-				</tr>
-				<tr>
-					<td>rm</td>
-					<td>Short for remove subroutine</td>
 				</tr>
 				<tr>
 					<td>sort</td>
@@ -188,16 +264,6 @@ const server = http.createServer((req, res) => {
 					<td>ws</td>
 					<td>Replace multiple whitespace with a single space</td>
 				</tr>
-				<tr>
-					<td>x</td>
-					<td>select using xpath selector rather than css selector</td>
-				</tr>
-				<!--
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				-->
 			</tbody>
 		</table>
 	</body>
