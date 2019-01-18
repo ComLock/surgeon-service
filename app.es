@@ -1,10 +1,10 @@
-const http = require('http');
+import http from 'http';
 
 import {parse as parseQueryString} from 'querystring';
 
 import surgeon, {
 	cheerioEvaluator,
-	readSubroutine,
+	//readSubroutine,
 	removeSubroutine,
 	selectSubroutine,
 	subroutineAliasPreset
@@ -89,20 +89,20 @@ const server = http.createServer((req, res) => {
 	if (req.method === 'POST') {
 		let body = '';
 		req.on('data', chunk => {
-				body += chunk.toString();
+			body += chunk.toString();
 		});
 		req.on('end', () => {
-				res.setHeader('Content-Type', 'text/json;charset=utf-8');
-				try {
-					const params = parseQueryString(body);
-					const anObj = (params.yml && params.yml.length) ? parseYaml(params.yml) : JSON.parse(params.objJson);
-					const result = operate(anObj, params.htmlStr);
-					res.statusCode = 200;
-					res.end(JSON.stringify(result));
-				} catch (e) {
-					res.statusCode = 500;
-					res.end(JSON.stringify({error: e.message}));
-				}
+			res.setHeader('Content-Type', 'text/json;charset=utf-8');
+			try {
+				const params = parseQueryString(body);
+				const anObj = (params.yml && params.yml.length) ? parseYaml(params.yml) : JSON.parse(params.objJson);
+				const result = operate(anObj, params.htmlStr);
+				res.statusCode = 200;
+				res.end(JSON.stringify(result));
+			} catch (e) {
+				res.statusCode = 500;
+				res.end(JSON.stringify({error: e.message}));
+			}
 		});
 	} else {
 		res.statusCode = 200;
@@ -272,5 +272,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, hostname, () => {
-	console.log(`Server running at http://${hostname}:${port}/`);
+	console.log(`Server running at http://${hostname}:${port}/`); //eslint-disable-line no-console
 });
