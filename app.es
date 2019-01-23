@@ -25,9 +25,9 @@ import xPathToCss from 'xpath-to-css';
 const yml = `title: select 'html head title' | rtc | trim
 heading: x '//h1' | rtc | ws
 link: so a | ra href | removeFragment | resolve http://www.example.com | normalize`;
-const obj = parseYaml(yml);
-const objJson = JSON.stringify(obj, null, 4);
-const htmlStr = `<html>
+const exampleObj = parseYaml(yml);
+const objJson = JSON.stringify(exampleObj, null, 4);
+const exampleHtmlStr = `<html>
 	<head>
 		<title> Title </title>
 	</head>
@@ -36,7 +36,7 @@ const htmlStr = `<html>
 		<a href="relative#fragment">Relative link</a>
 	</body>
 </html>`;
-const htmlAttr = htmlStr.replace('<', '&lt;').replace('>', '&gt;');
+const htmlAttr = exampleHtmlStr.replace('<', '&lt;').replace('>', '&gt;');
 
 //const hostname = '127.0.0.1';
 const hostname = '0.0.0.0';
@@ -96,14 +96,26 @@ const server = http.createServer((req, res) => {
 		});
 		req.on('end', () => {
 			res.setHeader('Content-Type', 'text/json;charset=utf-8');
+			let obj;
+			let htmlStr;
 			try {
 				const params = parseQueryString(body);
-				const anObj = (params.yml && params.yml.length) ? parseYaml(params.yml) : JSON.parse(params.objJson);
-				const result = operate(anObj, params.htmlStr);
+				htmlStr = params.htmlStr; // eslint-disable-line prefer-destructuring
+				obj = (params.yml && params.yml.length) ? parseYaml(params.yml) : JSON.parse(params.objJson);
+				const result = operate(obj, htmlStr);
 				res.statusCode = 200;
 				res.end(JSON.stringify(result));
 			} catch (e) {
 				res.statusCode = 500;
+				console.error( // eslint-disable-line no-console
+					`────────────────────────────────────────────────────────────────────────────────
+${htmlStr}
+────────────────────────────────────────────────────────────────────────────────
+${JSON.stringify(obj, null, 4)}
+────────────────────────────────────────────────────────────────────────────────
+${e.message}
+`
+				);
 				res.end(JSON.stringify({error: e.message}));
 			}
 		});
